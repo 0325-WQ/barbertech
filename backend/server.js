@@ -38,6 +38,40 @@ app.get('/api/products', async (req, res) => {
         res.status(500).json({ error: "Error consultando el catálogo en RDS" });
     }
 });
+
+app.get('/api/products/category/:category', async (req, res) => {
+    // 1. Capturamos la categoría desde la URL (ej. 'maquinas')
+    const { category } = req.params;
+
+    try {
+        // 2. Consulta SQL con JOIN de precios, filtrando por la nueva columna
+        const query = `
+            SELECT 
+                p.id, 
+                p.sku, 
+                p.name, 
+                p.description, 
+                p.stock, 
+                p.imagen_url,
+                p.category,
+                MAX(CASE WHEN pr.role_type = 'CLIENTE' THEN pr.amount END) AS precio_cliente,
+                MAX(CASE WHEN pr.role_type = 'MAYORISTA' THEN pr.amount END) AS precio_mayorista
+            FROM products p
+            LEFT JOIN prices pr ON p.id = pr.product_id
+            WHERE UPPER(p.category) = UPPER(?)
+            GROUP BY p.id;
+        `;
+        
+        // 3. Ejecutamos de forma segura pasando el parámetro de la categoría
+        const [rows] = await db.execute(query, [category]);
+        
+        // 4. Devolvemos el arreglo de productos filtrados (si no hay ninguno, enviará un arreglo vacío [])
+        res.json(rows);
+    } catch (error) {
+        console.error("Error al filtrar por categoría:", error);
+        res.status(500).json({ error: "Error consultando las categorías en RDS" });
+    }
+});
 // =========================================================================
 // COMPONENTES ADICIONALES REQUERIDOS POR LA GUÍA
 // =========================================================================
