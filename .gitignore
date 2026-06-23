@@ -1,0 +1,11 @@
+# Ignorar librerías locales de Node
+backend/node_modules/
+node_modules/
+
+# Ignorar archivos con contraseñas reales
+backend/.env
+.env
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
