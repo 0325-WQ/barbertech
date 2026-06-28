@@ -35,7 +35,8 @@ app.get('/api/products', async (req, res) => {
         const [rows] = await db.execute(query);
         res.json(rows);
     } catch (error) {
-        res.status(500).json({ error: "Error consultando el catálogo en RDS" });
+        console.error("Error en MySQL Local (Productos):", error);
+        res.status(500).json({ error: "Error consultando el catálogo local" });
     }
 });
 
@@ -65,11 +66,11 @@ app.get('/api/products/category/:category', async (req, res) => {
         // 3. Ejecutamos de forma segura pasando el parámetro de la categoría
         const [rows] = await db.execute(query, [category]);
         
-        // 4. Devolvemos el arreglo de productos filtrados (si no hay ninguno, enviará un arreglo vacío [])
+        // 4. Devolvemos el arreglo de productos filtrados
         res.json(rows);
     } catch (error) {
-        console.error("Error al filtrar por categoría:", error);
-        res.status(500).json({ error: "Error consultando las categorías en RDS" });
+        console.error("Error en MySQL Local (Categoría):", error);
+        res.status(500).json({ error: "Error consultando las categorías locales" });
     }
 });
 // =========================================================================
@@ -91,7 +92,8 @@ app.post('/api/leads', (req, res) => {
     res.status(201).json({ success: true, message: 'Lead capturado correctamente.' });
 });
 
-const PORT = process.env.PORT || 80;
+// Aseguramos que el puerto por defecto sea 3000 si no se encuentra la variable
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor BarberTech API REST escuchando en puerto ${PORT}`);
 });
