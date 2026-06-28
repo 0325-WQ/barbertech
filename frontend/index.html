@@ -72,7 +72,7 @@
     async function obtenerProductosDeServidor() {
         try {
             // Usamos la IP pública real y el puerto 3000 configurado en tu server.js
-            const respuesta = await fetch('http://54.147.0.224:3000/api/products');
+            const respuesta = await fetch('/api/products');
             productosDesdeBackend = await respuesta.json();
             
             // Si la respuesta es un objeto de error (como el JSON que nos salía), no renderizar
