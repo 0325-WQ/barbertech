@@ -1,14 +1,11 @@
 const mysql = require('mysql2');
 require('dotenv').config(); // Carga las variables directamente desde el .env de la carpeta backend
 
-const pool = mysql.createPool({
-    host: process.env.DB_HOST || '127.0.0.1',
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
+const connection = mysql.createPool({
+    host: '127.0.0.1',
+    user: 'admin_barbertech',
+    password: '2026Segura_Cont',
+    database: 'barbertech_db'
 });
 
 // Buenas prácticas: Asegurar codificación universal en cada consulta
