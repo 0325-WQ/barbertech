@@ -1,111 +1,123 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BarberTech - Equipamiento Premium Cloud</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BarberTech - Equipamiento Premium Cloud</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="logo">BARBER<span>TECH</span></a>
-            
-            <ul class="nav-menu">
-                <li><a href="#" class="nav-link active">Inicio</a></li>
-                <li><a href="#catalogo" class="nav-link">Catálogo Cloud</a></li>
-                <li><a href="#contacto" class="nav-link">Contacto</a></li>
-            </ul>
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="#" class="logo">BARBER<span>TECH</span></a>
+                
+                <ul class="nav-menu">
+                    <li><a href="#" class="nav-link active">Inicio</a></li>
+                    <li><a href="#catalogo" class="nav-link">Catálogo Cloud</a></li>
+                    <li><a href="#contacto" class="nav-link">Contacto</a></li>
+                </ul>
 
-            <select id="roleSelector" class="role-selector" onchange="cargarCatalogoSimulado()">
-                <option value="CLIENTE">Consumidor (B2C)</option>
-                <option value="MAYORISTA">Distribuidor (B2B)</option>
-            </select>
-        </div>
-    </nav>
-
-    <header class="hero">
-        <h2>Infraestructura de Suministros Premium</h2>
-        <p>Explora herramientas de barbería profesional de alta gama distribuidas de forma automatizada mediante tecnologías descentralizadas.</p>
-    </header>
-
-    <main class="catalogo-section" id="catalogo">
-        <h3 class="section-title">Inventario en Tiempo Real</h3>
-        <div class="grid" id="catalogo-grid">
+                <select id="roleSelector" class="role-selector" onchange="renderizarCatalogo()">
+                    <option value="CLIENTE">Consumidor (B2C)</option>
+                    <option value="MAYORISTA">Distribuidor (B2B)</option>
+                </select>
             </div>
-    </main>
+        </nav>
 
-    <section class="leads-section" id="contacto">
-        <div class="form-container">
-            <h3 style="font-size: 24px; margin-top: 0; text-align: center;">¿Quieres una cuenta Mayorista?</h3>
-            <p style="color: var(--texto-mutado); text-align: center; margin-bottom: 30px; font-size: 14px;">Déjanos tus datos y un asesor comercial se pondrá en contacto contigo.</p>
-            
-            <form id="leadForm" onsubmit="procesarLead(event)">
-                <div class="form-group">
-                    <label for="contact_name">Nombre Completo</label>
-                    <input type="text" id="contact_name" class="form-control" required placeholder="Ej. Mauricio Camarena">
+        <header class="hero">
+            <h2>Infraestructura de Suministros Premium</h2>
+            <p>Explora herramientas de barbería profesional de alta gama distribuidas de forma automatizada mediante tecnologías descentralizadas.</p>
+        </header>
+
+        <main class="catalogo-section" id="catalogo">
+            <h3 class="section-title">Inventario en Tiempo Real</h3>
+            <div class="grid" id="catalogo-grid">
                 </div>
-                <div class="form-group">
-                    <label for="phone">Teléfono de Contacto</label>
-                    <input type="tel" id="phone" class="form-control" required placeholder="Ej. +507 6000-0000">
-                </div>
-                <div class="form-group">
-                    <label for="detail">Mensaje o Detalle del Negocio</label>
-                    <textarea id="detail" class="form-control" rows="4" required placeholder="Cuéntanos sobre tu barbería o salón..."></textarea>
-                </div>
-                <button type="submit" class="btn" style="margin-top: 10px;">Enviar Solicitud</button>
-            </form>
-        </div>
-    </section>
+        </main>
 
-    <footer class="footer">
-        <p>&copy; 2026 BarberTech Cloud Project. Todos los derechos reservados.</p>
-        <p style="font-size: 11px; color: #475569;">Diseño desacoplado bajo Ingeniería Web (IWEB) - Universidad Autónoma de Chiriquí.</p>
-    </footer>
+        <section class="leads-section" id="contacto">
+            <div class="form-container">
+                <h3 style="font-size: 24px; margin-top: 0; text-align: center;">¿Quieres una cuenta Mayorista?</h3>
+                <p style="color: var(--texto-mutado); text-align: center; margin-bottom: 30px; font-size: 14px;">Déjanos tus datos y un asesor comercial se pondrá en contacto contigo.</p>
+                
+                <form id="leadForm" onsubmit="procesarLead(event)">
+                    <div class="form-group">
+                        <label for="contact_name">Nombre Completo</label>
+                        <input type="text" id="contact_name" class="form-control" required placeholder="Ej. Mauricio Camarena">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Teléfono de Contacto</label>
+                        <input type="tel" id="phone" class="form-control" required placeholder="Ej. +507 6000-0000">
+                    </div>
+                    <div class="form-group">
+                        <label for="detail">Mensaje o Detalle del Negocio</label>
+                        <textarea id="detail" class="form-control" rows="4" required placeholder="Cuéntanos sobre tu barbería o salón..."></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="margin-top: 10px;">Enviar Solicitud</button>
+                </form>
+            </div>
+        </section>
 
-    <script>
-    // 1. YA NO EXISTE EL ARREGLO MANUAL. Creamos una variable vacía para guardar lo que envíe AWS.
-    let productosDesdeAWS = [];
+        <footer class="footer">
+            <p>&copy; 2026 BarberTech Cloud Project. Todos los derechos reservados.</p>
+            <p style="font-size: 11px; color: #475569;">Diseño desacoplado bajo Ingeniería Web (IWEB) - Universidad Autónoma de Chiriquí.</p>
+        </footer>
 
-    // 2. NUEVA FUNCIÓN: Va a buscar los 30 productos reales a tu servidor de AWS
-    async function obtenerProductosDeAWS() {
+       <script>
+    // 1. Almacenamiento de datos del catálogo local
+    let productosDesdeBackend = [];
+
+    // 2. FUNCIÓN CORRECTA: Apunta a la IP pública de tu servidor EC2
+    async function obtenerProductosDeServidor() {
         try {
-            // Reemplazas 'localhost' por la IP pública de tu instancia de AWS EC2
-            const respuesta = await fetch('http://localhost:3000/api/products');
-            productosDesdeAWS = await respuesta.json();
+            // Usamos la IP pública real y el puerto 3000 configurado en tu server.js
+            const respuesta = await fetch('http://54.147.0.224:3000/api/products');
+            productosDesdeBackend = await respuesta.json();
             
-            // Una vez que recibimos los datos de la nube, dibujamos el catálogo
+            // Si la respuesta es un objeto de error (como el JSON que nos salía), no renderizar
+            if (productosDesdeBackend.error) {
+                console.error("El backend devolvió un error:", productosDesdeBackend.error);
+                document.getElementById('catalogo-grid').innerHTML = `<p style="color: red; text-align: center;">Error al cargar el catálogo local.</p>`;
+                return;
+            }
+
             renderizarCatalogo();
         } catch (error) {
-            console.error("Error conectando con la API de BarberTech en AWS:", error);
+            console.error("Error conectando con la API de BarberTech en la EC2:", error);
+            document.getElementById('catalogo-grid').innerHTML = `<p style="color: red; text-align: center;">No se pudo conectar con el servidor.</p>`;
         }
     }
 
-    // 3. TU FUNCIÓN DE RENDERIZADO: Mantiene la misma lógica del selector de consumidor
+    // 3. FUNCIÓN DE RENDERIZADO DINÁMICO
     function renderizarCatalogo() {
         const grid = document.getElementById('catalogo-grid');
         const rolElegido = document.getElementById('roleSelector').value;
 
         grid.innerHTML = '';
 
-        // Ahora recorremos los datos reales que vinieron de la base de datos RDS
-        productosDesdeAWS.forEach(prod => {
-            // Nota: Mapeamos los nombres de las columnas tal como los creaste en tu tabla SQL de RDS
-            const precioFinal = (rolElegido === 'MAYORISTA') ? prod.precio_mayorista : prod.precio_cliente;
+        if (productosDesdeBackend.length === 0) {
+            grid.innerHTML = '<p style="text-align: center; color: var(--texto-mutado);">No hay productos disponibles en el inventario local.</p>';
+            return;
+        }
+
+        productosDesdeBackend.forEach(prod => {
+            // Evaluamos el rol seleccionado para asignar el precio correspondiente
+            const precioRaw = (rolElegido === 'MAYORISTA') ? prod.precio_mayorista : prod.precio_cliente;
+            // Validamos que el precio sea un número válido antes de aplicar .toFixed()
+            const precioFinal = precioRaw ? parseFloat(precioRaw).toFixed(2) : "0.00";
             
             grid.innerHTML += `
                 <div class="card">
                     <div>
                         <div class="img-box">
-                            <!-- La columna imagen_url ya contendrá el link directo a tu Bucket de S3 -->
-                            <img src="${prod.imagen_url}" alt="${prod.name}" style="width: 100%; height: 100%; object-fit: cover;">
+                            <img src="${prod.imagen_url || 'https://via.placeholder.com/150'}" alt="${prod.name}" style="width: 100%; height: 100%; object-fit: cover;">
                         </div>
                         <h4 class="title">${prod.name}</h4>
                         <p class="sku">SKU: ${prod.sku}</p>
                     </div>
                     <div>
-                        <p class="price">$${parseFloat(precioFinal).toFixed(2)}</p>
+                        <p class="price">$${precioFinal}</p>
                         <button class="btn" onclick="alert('Producto ${prod.sku} añadido al carrito')">Añadir al Carrito</button>
                     </div>
                 </div>
@@ -113,11 +125,11 @@
         });
     }
 
-    // Escuchador para que el menú de rol siga funcionando dinámicamente al cambiar de opción
+    // Escuchador dinámico para el cambio de rol
     document.getElementById('roleSelector').addEventListener('change', renderizarCatalogo);
 
-    // Al cargar la página, llamamos automáticamente a AWS
-    document.addEventListener('DOMContentLoaded', obtenerProductosDeAWS);
+    // Al cargar el DOM, ejecutamos de inmediato la petición a la API externa
+    document.addEventListener('DOMContentLoaded', obtenerProductosDeServidor);
 </script>
-</body>
-</html>
+    </body>
+    </html>
